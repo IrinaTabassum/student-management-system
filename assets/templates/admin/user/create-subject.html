@@ -1,0 +1,25 @@
+{{template "header.html"}}
+    <form action="/users/store-subject" method="POST">
+        <input type="text" hidden name="csrf_token" value="{{.CSRFToken}}">
+        
+        <label for="">Select Class</label>
+        <select name="Class_ID" id="">
+            <option value="" selected>Select Class</option>
+            {{ range .ListClass}}
+                <option value="{{.ID}}">{{.ClassName}}</option>
+            {{end}}
+        </select>
+        {{ with (index .FormError "Class_id") }}
+        <p style="color: red;">{{.}}</p>
+        {{end}}
+        <br>
+        <label for="subject-name">Enter Subject Name</label>
+        <input id="subject-name" type="text" name="SubjectName" value="">
+        {{ with (index .FormError "Subject_name") }}
+        <p style="color: red;">{{.}}</p>
+        {{end}}
+        <br>
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>

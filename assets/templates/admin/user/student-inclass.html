@@ -1,0 +1,21 @@
+{{template "header.html"}}
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Total Marks</th>
+        <th>Actions</th>
+    </tr>
+    {{range .}}
+    <tr>
+        <td>{{.Sid}}</td>
+        <td>{{.SFirst_Name}}</td>
+        <td>{{.Total}}</td>
+        <td>
+            <a href="/users/{{.Sid}}/result-detail"> View result detail</a>
+        </td>
+    </tr>
+    {{end}}
+</table>
+</body>
+</html>

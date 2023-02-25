@@ -1,0 +1,12 @@
+{{template "header.html"}}
+    <form action="/users/store-class" method="POST">
+            <input type="text" hidden name="csrf_token" value="{{.CSRFToken}}">
+            <label for="class-name">Enter Class Name</label>
+            <input type="text" name="ClassName" value="">
+            <p style="color: red;">{{ .FormError.ClassName }}</p>
+        <br>
+        
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>

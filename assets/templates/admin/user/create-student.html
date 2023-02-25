@@ -1,0 +1,38 @@
+{{template "header.html"}}
+    <form action="/users/store-student" method="POST">
+        <input type="text" hidden name="csrf_token" value="{{.CSRFToken}}">
+        
+        <label for="">Select Class</label>
+        <select name="Class_ID" id="">
+            <option value="" selected>Select Class</option>
+            {{ range .ListClass}}
+                <option value="{{.ID}}">{{.ClassName}}</option>
+            {{end}}
+        </select>
+        {{ with (index .FormError "Class_ID") }}
+        <p style="color: red;">{{.}}</p>
+        {{end}}
+        <br>
+        <label for="role">Enter Role </label>
+        <input id="role" type="number" name="Role">
+        {{ with (index .FormError "Role") }}
+        <p style="color: red;">{{.}}</p>
+        {{end}}
+        <br>
+
+        <label for="first-name">Enter First Name</label>
+        <input id="first-name" type="text" name="FirstName" >
+        {{ with (index .FormError "FirstName") }}
+        <p style="color: red;">{{.}}</p>
+        {{end}}
+        <br>
+        <label for="last-name">Enter Last Name</label>
+        <input id="last-name" type="text" name="LastName" >
+        {{ with (index .FormError "LastName") }}
+        <p style="color: red;">{{.}}</p>
+        {{end}}
+        <br>
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>

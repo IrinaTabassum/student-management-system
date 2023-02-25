@@ -1,0 +1,49 @@
+{{template "header.html"}}
+
+<a href="/users/create">Create New User</a>
+<form action="/users" method="get">
+    <input type="text" name="SearchTerm" id="term" value="{{ .SearchTerm}}">
+    <input type="submit" value="Search">
+</form>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Userame</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    {{range .Users}}
+    <tr>
+        <td>{{.ID}}</td>
+        <td>{{.FirstName}}</td>
+        <td>{{.LastName}}</td>
+        <td>{{.Username}}</td>
+        <td>{{.Email}}</td>
+        <td>{{if .Status}}Active{{else}}Inactive{{end}}</td>
+        <td>
+            <a href="/users/{{.ID}}/edit">Edit</a>
+            <a href="/users/{{.ID}}/delete">Delete</a>
+        </td>
+    </tr>
+    {{end}}
+</table>
+<br>
+
+<ul class="pagination">
+    {{$prev:= calculatePreviousPage .CurrentPage}}
+    <li><a href="{{if $prev}}/users?page={{$prev}}{{else}}javascript:;{{end}}">Prev</a></li>
+    {{ range $i := until .TotalPage }}
+    {{$page := add $i 1}}
+    <li class="{{if eq $page $.CurrentPage}}active{{end}}">
+        <a href="{{if eq $page $.CurrentPage}}javascript:;{{else}}/users?page={{$page}}{{end}}">{{$page}}</a>
+    </li>
+    {{end}}
+
+    {{$next:= calculateNextPage .CurrentPage .TotalPage}}
+    <li><a href="{{if $next}}/users?page={{$next}}{{else}}javascript:;{{end}}">Next</a></li>
+</ul>
+
+{{ template "footer.html"}}
